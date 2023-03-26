@@ -1,0 +1,82 @@
+[
+    {
+        "id" : 1,
+        "name_tr" : "Esenyurt",
+        "name_en" : "Esenyurt",
+        "tier" : 1,
+        "price" : 1000,
+        "rent" : 100
+    },
+    {
+        "id" : 2,
+        "name_tr" : "Kadıköy",
+        "name_en" : "Kadikoy",
+        "tier" : 2,
+        "price" : 2000,
+        "rent" : 200
+    },
+    {
+        "id" : 3,
+        "name_tr" : "Kartal",
+        "name_en" : "Kartal",
+        "tier" : 3,
+        "price" : 3000,
+        "rent" : 300
+    },
+    {
+        "id" : 4,
+        "name_tr" : "Küçükçekmece",
+        "name_en" : "Kucukcekmece",
+        "tier" : 3,
+        "price" : 4000,
+        "rent" : 400
+    },
+    {
+        "id" : 5,
+        "name_tr" : "Maltepe",
+        "name_en" : "Maltepe",
+        "tier" : 3,
+        "price" : 5000,
+        "rent" : 500
+    },
+    {
+        "id" : 6,
+        "name_tr" : "Pendik",
+        "name_en" : "Pendik",
+        "tier" : 4,
+        "price" : 6000,
+        "rent" : 600
+    },
+    {
+        "id" : 7,
+        "name_tr" : "Sancaktepe",
+        "name_en" : "Sancaktepe",
+        "tier" : 3,
+        "price" : 7000,
+        "rent" : 700
+    },
+    {
+        "id" : 8,
+        "name_tr" : "Sarıyer",
+        "name_en" : "Sariyer",
+        "tier" : 4,
+        "price" : 8000,
+        "rent" : 800
+    },
+    {
+        "id" : 9,
+        "name_tr" : "Sultanbeyli",
+        "name_en" : "Sultanbeyli",
+        "tier" : 2,
+        "price" : 9000,
+        "rent" : 900
+    },
+    {
+        "id" : 10,
+        "name_tr" : "Tuzla",
+        "name_en" : "Tuzla",
+        "tier" : 1,
+        "price" : 10000,
+        "rent" : 1000
+    }
+]

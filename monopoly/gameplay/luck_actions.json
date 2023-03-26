@@ -1,0 +1,162 @@
+[
+    {
+        "id": 1,
+        "name_tr": "İşe başladınız. Maaşınızı alın. (200 TL al.)",
+        "name_en": "You started working. Get your salary. (Get 200 TL)",
+        "type": "good_chance",
+        "action": "get_money",
+        "amount": 200
+    },
+    {
+        "id": 2,
+        "name_tr": "İşten çıkarıldınız. Maaşınızı kaybedin. (200 TL öde.)",
+        "name_en": "You got fired. Lose your salary. (Pay 200 TL)",
+        "type": "bad_chance",
+        "action": "pay_money",
+        "amount": 200
+    },
+    {
+        "id": 3,
+        "name_tr": "Kodesten ücretsiz çıkış yolu buldunuz.",
+        "name_en": "You found a free escape route from the jail.",
+        "type": "good_chance",
+        "action": "free_escape",
+        "amount": 0
+    },
+    {
+        "id" : 4,
+        "name_tr" : "Ücretsiz seyahat kartı kazandınız.",
+        "name_en" : "You won a free travel card.",
+        "type" : "good_chance",
+        "action" : "free_travel",
+        "amount" : 0
+    },
+    {
+        "id" : 5,
+        "name_tr" : "Hayvanat bahçesine özel bir tur kazandınız. (100 TL al.)",
+        "name_en" : "You won a special tour to the zoo. (Get 100 TL)",
+        "type" : "good_chance",
+        "action" : "get_money",
+        "amount" : 100
+    },
+    {
+        "id" : 6,
+        "name_tr" : "Mülklerinin tamirata ihtiyacı var! (Mülk başına 30 TL öde.)",
+        "name_en" : "Your properties need repair! (Pay 30 TL for each property.)",
+        "type" : "bad_chance",
+        "action" : "pay_money_by_property",
+        "amount" : 30
+    },
+    {
+        "id" : 7,
+        "name_tr" : "Elektrik faturasının zamanı geldi. (150 TL öde.)",
+        "name_en" : "Your electricity bill is due. (Pay 150 TL)",
+        "type" : "bad_chance",
+        "action" : "pay_money",
+        "amount" : 150
+    },
+    {
+        "id" : 8,
+        "name_tr" : "Müklerinin vergi ödemesi zamanı geldi. (Mülk başına 50 TL öde.)",
+        "name_en" : "Your properties' tax payment is due. (Pay 50 TL for each property.)",
+        "type" : "bad_chance",
+        "action" : "pay_money_by_property",
+        "amount" : 50
+    },
+    {
+        "id" : 9,
+        "name_tr" : "Trafik cezası aldınız. (100 TL öde.)",
+        "name_en" : "You got a traffic ticket. (Pay 100 TL)",
+        "type" : "bad_chance",
+        "action" : "pay_money",
+        "amount" : 100
+    },
+    {
+        "id" : 10,
+        "name_tr" : "Arkadaşlarını kötü bir yatırıma sürükledin. (Her oyuncuya 50 TL öde.)",
+        "name_en" : "You dragged your friends into a bad investment. (Pay 50 TL to each player.)",
+        "type" : "bad_chance",
+        "action" : "pay_money_to_all",
+        "amount" : 50
+    },
+    {
+        "id" : 11,
+        "name_tr" : "Ah olamaz! Arabanın üzerine bir ağaç düştü. (100 TL öde.)",
+        "name_en" : "Oh no! A tree fell on your car. (Pay 100 TL)",
+        "type" : "bad_chance",
+        "action" : "pay_money",
+        "amount" : 100
+    },
+    {
+        "id" : 12,
+        "name_tr" : "Bir arkadaşınızın evine misafir oldunuz. (50 TL öde.)",
+        "name_en" : "You visited a friend's house. (Pay 50 TL)",
+        "type" : "bad_chance",
+        "action" : "pay_money",
+        "amount" : 50
+    },
+    {
+        "id" : 13,
+        "name_tr" : "Trafik kazası geçirdiniz. (100 TL öde.)",
+        "name_en" : "You got into a car accident. (Pay 100 TL)",
+        "type" : "bad_chance",
+        "action" : "pay_money",
+        "amount" : 100
+    },
+    {
+        "id" : 14,
+        "name_tr" : "Kazandığınız bir yarıştan para kazandınız. (100 TL al.)",
+        "name_en" : "You win a race and get some money. (Get 100 TL)",
+        "type" : "good_chance",
+        "action" : "get_money",
+        "amount" : 100
+    },
+    {
+        "id" : 15,
+        "name_tr" : "Orman safarisi kazandın! (100 TL al.)",
+        "name_en" : "You won a forest safari! (Get 100 TL)",
+        "type" : "good_chance",
+        "action" : "get_money",
+        "amount" : 100
+    },
+    {
+        "id" : 16,
+        "name_tr" : "Bir arkadaşınızın doğum gününe katıldınız. (50 TL öde.)",
+        "name_en" : "You attended a friend's birthday party. (Pay 50 TL)",
+        "type" : "bad_chance",
+        "action" : "pay_money",
+        "amount" : 50
+    },
+    {
+        "id" : 17,
+        "name_tr" : "Sosyal medya reklamı yaptınız. (100 TL öde.)",
+        "name_en" : "You made a social media ad. (Pay 100 TL)",
+        "type" : "good_chance",
+        "action" : "pay_money",
+        "amount" : 100
+    },
+    {
+        "id" : 18,
+        "name_tr" : "Kano gezisi kazandın! (100 TL al.)",
+        "name_en" : "You won a canoe trip! (Get 100 TL)",
+        "type" : "good_chance",
+        "action" : "get_money",
+        "amount" : 100
+    },
+    {
+        "id" : 19,
+        "name_tr" : "En sevdiğiniz futbol takımına maç biletleri kazandınız. (100 TL al.)",
+        "name_en" : "You won tickets to your favorite football team's match. (Get 100 TL)",
+        "type" : "good_chance",
+        "action" : "get_money",
+        "amount" : 100
+    },
+    {
+        "id" : 20,
+        "name_tr" : "En sevdiğin yemek restoranına özel bir gece yemeği kazandın. (100 TL al.)",
+        "name_en" : "You won a special dinner at your favorite restaurant. (Get 100 TL)",
+        "type" : "good_chance",
+        "action" : "get_money",
+        "amount" : 100
+    }
+]
