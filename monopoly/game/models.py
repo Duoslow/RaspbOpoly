@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class LuckyCard(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
+    card_id = models.TextField(verbose_name="Kart ID", default=None, null=True, unique=True)
     name_tr = models.TextField(verbose_name="Kart Adı", default=None, null=True)
     name_en = models.TextField(verbose_name="Card Name", default=None, null=True)
     type = models.TextField(verbose_name="Kart Tipi", default=None, null=True)
