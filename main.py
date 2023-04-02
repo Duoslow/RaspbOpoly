@@ -1,20 +1,52 @@
-import requests, json
+import time, requests
+from pirc522 import RFID
+import RPi.GPIO as GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+red_led = 7
+green_led = 11
+blue_led = 13
+GPIO.setup(red_led,GPIO.OUT)
+GPIO.setup(green_led,GPIO.OUT)
+GPIO.setup(blue_led,GPIO.OUT)
+rdr = RFID()
+util = rdr.util()
+util.debug = True
 
-# read luck_actions.json
-data = {}
-with open('luck_actions.json',encoding='utf-8') as f:
-    data = json.load(f)
+def green():
+    GPIO.output(green_led,GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(green_led,GPIO.HIGH)
 
-types = ['good_chance', 'bad_chance']
-actions = ['get_money', 'pay_money', 'free_escape', 'free_travel', 'pay_money_by_property', 'pay_money_to_all']
-types_count = [0, 0]
-for i in data:
-    if i['type'] not in types:
-        types.append(i['type'])
-    if i['action'] not in actions:
-        actions.append(i['action'])
-    types_count[types.index(i['type'])] += 1
+def red():
+    GPIO.output(red_led,GPIO.LOW)
+    time.sleep(0.3)
+    GPIO.output(red_led,GPIO.HIGH)
 
-print('types:', types)
-print('actions:', actions)
-print('types_count:', types_count)
+def blue():
+    GPIO.output(blue_led,GPIO.LOW)
+    time.sleep(0.1)
+    GPIO.output(blue_led,GPIO.HIGH)
+blue()
+red()
+green()
+while True:
+    rdr.wait_for_tag()
+    (error, tag_type) = rdr.request()
+    if not error:
+        print("Tag detected")
+        blue()
+        (error, uid) = rdr.anticoll()
+        if not error:
+            green()
+            print("UID: " + str(uid))
+            hex_uid = hex(uid[0])[2:] + hex(uid[1])[2:] + hex(uid[2])[2:] + hex(uid[3])[2:] + hex(uid[4])[2:]
+            print("Hex UID: " + hex_uid)
+            print("Sent to server")
+            req = requests.post('http://10.10.10.27:8000/game/send_card/', data = {'card_id': str(hex_uid)})
+            if req.status_code == 200:
+                print("Success")
+            time.sleep(2)   
+        else:
+            print("Error reading UID")
+            red()

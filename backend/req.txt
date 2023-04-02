@@ -1,0 +1,20 @@
+asgiref==3.6.0
+certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
+Django==3.2.5
+django-cors-headers==3.13.0
+django-rest-framework==0.1.0
+djangorestframework==3.14.0
+greenlet==2.0.2
+numpy==1.24.1
+orjson==3.8.5
+pandas==1.5.2
+psycopg2==2.9.5
+python-dateutil==2.8.2
+python-dotenv==0.21.1
+pytz==2022.7.1
+six==1.16.0
+SQLAlchemy==1.4.46
+sqlparse==0.4.3
+typing_extensions==4.4.0
+wincertstore==0.2
+XlsxWriter==3.0.8
