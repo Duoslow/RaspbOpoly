@@ -27,10 +27,6 @@ import re
 from sqlalchemy import create_engine
 from .models import *
 # Create your views here.
-# with open('gameplay/luck_actions.json', 'r', encoding='utf-8') as f:
-#     luck_actions = json.load(f)
-# completed_actions = []
-
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -39,15 +35,49 @@ def send_card(request):
         data = request.data
         card_id = data['card_id']
         print(card_id)
-        if LuckyCard.objects.filter(card_id=card_id).exists():
-            card = LuckyCard.objects.get(card_id=card_id)
-            # print card all data
-            print(card.id)
-            print(card.card_id)
-            print(card.name_tr)
-            print(card.name_en)
-            print(card.type)
-            print(card.action)
-            print(card.action_value)
+        card = Cards.objects.get(card_id=card_id)
+        game = Game.objects.get()
+        if card.card_type == 'player' and game.waiting_for_players:
+            print('waiting for players')
+            player_exists = Players.objects.filter(card=card).exists()
+            if player_exists:
+                print('player exists')
+                return JsonResponse({'status':'player_exists','player': player_exists})
+            Players.objects.create(card=card,name=card.card_name)
+            return Response(status=status.HTTP_200_OK)
+        elif card.card_type == 'action':
+            Actions.objects.create(card=card,)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_200_OK)
+    
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_players(request):
+    if request.method == 'GET':
+        players = Players.objects.all()
+        print(players)
+        return JsonResponse({'players': list(players.values())})
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_new_game(request):
+    if request.method == 'POST':
+        data = request.data
+        Players.objects.all().delete()
+        Actions.objects.all().delete()
+        Game.objects.all().delete()
+        game = Game.objects.create()
         return Response(status=status.HTTP_200_OK)
     
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def start_game(request):
+    if request.method == 'POST':
+        data = request.data
+        players = Players.objects.all()
+        game = Game.objects.get()
+        game.waiting_for_players = False
+        game.players.set(players)
+        game.save()
+        return Response(status=status.HTTP_200_OK)

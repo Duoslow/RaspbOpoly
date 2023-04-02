@@ -1,53 +1,42 @@
 from django.db import models
-
+import random
 # Create your models here.
-class LuckyCard(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    card_id = models.TextField(verbose_name="Kart ID", default=None, null=True, unique=True)
-    name_tr = models.TextField(verbose_name="Kart Adı", default=None, null=True)
-    name_en = models.TextField(verbose_name="Card Name", default=None, null=True)
-    type = models.TextField(verbose_name="Kart Tipi", default=None, null=True)
-    action = models.TextField(verbose_name="Kart Eylemi", default=None, null=True)
-    action_value = models.IntegerField(verbose_name="Kart Eylemi Değeri", default=None, null=True)
+colors = ['red', 'blue', 'green', 'yellow', 'black']
 
-class Property(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    name_tr = models.TextField(verbose_name="Emlak Adı", default=None, null=True)
-    name_en = models.TextField(verbose_name="Property Name", default=None, null=True)
-    price = models.IntegerField(verbose_name="Emlak Fiyatı", default=None, null=True)
-    rent = models.IntegerField(verbose_name="Kiracılık Ücreti", default=None, null=True)
-    rent_1 = models.IntegerField(verbose_name="Kiracılık Ücreti 1", default=None, null=True)
-    rent_2 = models.IntegerField(verbose_name="Kiracılık Ücreti 2", default=None, null=True)
-    rent_3 = models.IntegerField(verbose_name="Kiracılık Ücreti 3", default=None, null=True)
-    group = models.TextField(verbose_name="Emlak Grubu", default=None, null=True)
-    color = models.TextField(verbose_name="Emlak Rengi", default=None, null=True)
+class Cards(models.Model):
+    card_id = models.TextField(default=None, null=True, blank=True)
+    card_name = models.TextField(default=None, null=True, blank=True)
+    card_type = models.TextField(default=None, null=True, blank=True)
+    card_action = models.TextField(default=None, null=True, blank=True)
+    card_value = models.TextField(default=None, null=True, blank=True)
+    card_color = models.TextField(default=None, null=True, blank=True)
+    def __str__(self):
+        return self.card_id
 
-class Player(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    card_id = models.TextField(verbose_name="Kart ID", default=None, null=True, unique=True)
-    name = models.TextField(verbose_name="Oyuncu Adı", default=None, null=True)
-    pawn = models.TextField(verbose_name="Oyuncu Taşı", default=None, null=True)
-    money = models.IntegerField(verbose_name="Oyuncu Para", default=None, null=True)
-    position = models.IntegerField(verbose_name="Oyuncu Pozisyon", default=None, null=True)
-    is_bankrupt = models.BooleanField(verbose_name="Oyuncu Bankrupt", default=False, null=True)
-    is_in_jail = models.BooleanField(verbose_name="Oyuncu Hapiste", default=False, null=True)
-    jail_count = models.IntegerField(verbose_name="Oyuncu Hapiste Kalma Sayısı", default=None, null=True)
-    is_in_game = models.BooleanField(verbose_name="Oyuncu Oyunda", default=False, null=True)
-    is_turn = models.BooleanField(verbose_name="Oyuncu Sırası", default=False, null=True)
-
-class PropertyOwner(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    property = models.ForeignKey(Property, verbose_name="Emlak", default=None, null=True, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Player, verbose_name="Emlak Sahibi", default=None, null=True, on_delete=models.CASCADE)
-    is_mortgaged = models.BooleanField(verbose_name="Emlak Hipote", default=False, null=True)
-
-class Game(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    name = models.TextField(verbose_name="Oyun Adı", default=None, null=True)
-    date = models.DateTimeField(verbose_name="Oyun Tarihi", auto_now=True)
-    # players = models.ManyToManyField(Player, verbose_name="Oyuncular", default=None, null=True)
-    # player_count = models.IntegerField(verbose_name="Oyuncu Sayısı", default=None, null=True)
-    # is_started = models.BooleanField(verbose_name="Oyun Başladı", default=False, null=True)
-    # is_finished = models.BooleanField(verbose_name="Oyun Bitti", default=False, null=True)
-    # is_paused = models.BooleanField(verbose_name="Oyun Durdu", default=False, null=True)
+class Actions(models.Model):
+    card = models.ForeignKey(Cards, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.card.card_id
     
+def random_color():
+    return random.choice(colors)
+class Players(models.Model):
+    name = models.TextField(default=None, null=True, blank=True)
+    card = models.OneToOneField(Cards, on_delete=models.CASCADE)
+    color = models.TextField(default=random_color, null=True, blank=True)
+    money = models.IntegerField(default=1500, null=True, blank=True)
+    jail = models.BooleanField(default=False, null=True, blank=True)
+    mortage = models.BooleanField(default=False, null=True, blank=True)
+    insurance = models.BooleanField(default=False, null=True, blank=True)
+    bankrupt = models.BooleanField(default=False, null=True, blank=True)
+    bank_money = models.IntegerField(default=0, null=True, blank=True)
+    def __str__(self):
+        return self.name
+    
+class Game(models.Model):
+    name = models.TextField(default=None, null=True, blank=True)
+    waiting_for_players = models.BooleanField(default=True, null=True, blank=True)
+    players = models.ManyToManyField(Players, blank=True)
+    actions = models.ManyToManyField(Actions, blank=True)
+    def __str__(self):
+        return str(self.id)

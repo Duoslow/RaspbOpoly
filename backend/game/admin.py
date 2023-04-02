@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import *
+
 # Register your models here.
 
-admin.site.register(Player)
-admin.site.register(Property)
-admin.site.register(PropertyOwner)
-admin.site.register(LuckyCard)
+from .models import *
+
+admin.site.register(Cards)
+admin.site.register(Actions)
+admin.site.register(Players)
+admin.site.register(Game)
