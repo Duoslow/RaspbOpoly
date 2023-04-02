@@ -1,92 +1,88 @@
 import React, { useEffect, useState, useRef } from "react";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { IconButton, Avatar, Box, Typography } from '@mui/material';
+import { IconButton, Avatar, Box, Typography, Stack, Chip } from '@mui/material';
 import { connect, useDispatch } from "react-redux";
 import { selectors, actions } from "../redux/store";
 
-const GameWaitPlayers = ({ game }) => {
-    // return wait for players to join game and list of players
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(actions.game.getPlayers());
-    }, [game]);
-    const NewGame = () => {
-        dispatch(actions.game.newGame());
-    }
-    return (
-        <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-        }}
-        >
-            <Box >
-                <Box sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: -1,
-                    backgroundImage: 'url(https://source.unsplash.com/featured/?landscape,mountains,dark)',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    filter: 'blur(4px)',
-                }}
-                />
-                <Box sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: -1,
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                }}
-                />
-            </Box>
-            <Box sx={{ flex: 1 }} />
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                    zIndex: 1,
-                    marginTop: '50%',
-                }}
-            >
-                <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', color: 'salmon' }}>
-                    RaspbOpoly
-                </Typography>
-                <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', color: 'snow' }}>
-                    List Of Joined Players
-                </Typography>
-                {game.players.map((player) => (
-                    <Typography variant="h6" gutterBottom sx={{ textAlign: 'center', color: 'sandybrown' }}>
-                        {player.name}
-                        </Typography>
-                        ))}
-                        <IconButton
-                            sx={{
-                                color: 'white',
-                                '&:hover': {
-                                    color: 'snow',
-                                },
-                            }}
-                            variant="contained"
-                            onClick={NewGame}
-                        >
-                            <Avatar sx={{ width: 98, height: 98, bgcolor: 'black', color: 'white', opacity: 0.8 }}>
-                                <PlayArrowIcon sx={{ width: 60, height: 60, }} />
-                            </Avatar>
-                        </IconButton>
-                    </Box>
-                </Box>
-            );
-        };
+const GameWaitPlayers = ({ game, ui }) => {
+  const dispatch = useDispatch();
+  const StartGame = () => {
+    // dispatch(actions.game.newGame());
+    dispatch(actions.ui.setUIState('gameUI'));
+    dispatch(actions.game.gameStarted());
+  }
 
-export default connect((state) => ({
-    game: selectors.game.getGame(state),
-}))(GameWaitPlayers);
+  const players = [
+    { name: 'Player 1', color: 'red', position: 0, money: 1500, properties: [] },
+    { name: 'Player 2', color: 'blue', position: 0, money: 1500, properties: [] },
+    { name: 'Player 3', color: 'green', position: 0, money: 1500, properties: [] },
+  ]
+
+  return (
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'row',
+    }}
+    >
+      <Box sx={{ flex: 1 }} />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          zIndex: 1,
+        }}
+      >
+        <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', color: 'salmon' }}>
+          RaspbOpoly
+        </Typography>
+        <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', color: 'snow' }}>
+          Waiting for players...
+        </Typography>
+        <Typography variant="h6" gutterBottom sx={{ textAlign: 'center', color: 'snow' }}>
+          List Of Joined Players
+        </Typography>
+        <Box >
+          {players.map((player, index) => (
+            <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 0.5 }}>
+              <Stack direction="row" spacing={1} sx={{ color: 'snow', alignItems: 'center', justifyContent: 'center' }}>
+                <Avatar sx={{ width: 38, height: 38, bgcolor: player.color, color: 'white', opacity: 0.8 }} />
+                <Typography variant="h6" gutterBottom sx={{ textAlign: 'center', color: 'snow' }}>
+                  {player.name}
+                </Typography>
+                <Chip label={`$${player.money}`} sx={{ bgcolor: 'black', color: 'white', opacity: 0.8 }} />
+              </Stack>
+            </Box>
+          ))
+          }
+        </Box>
+
+        <IconButton
+          sx={{
+            color: 'white',
+            '&:hover': {
+              color: 'snow',
+            },
+          }}
+          variant="contained"
+          onClick={StartGame}
+        >
+          <Avatar sx={{ width: 98, height: 98, bgcolor: 'black', color: 'white', opacity: 0.8 }}>
+            <PlayArrowIcon sx={{ width: 60, height: 60, }} />
+          </Avatar>
+        </IconButton>
+      </Box>
+    </Box>
+  );
+};
+
+export default connect(
+  (state) => ({
+    game: state.game,
+    ui: state.ui,
+  }),
+)(GameWaitPlayers);
+
+

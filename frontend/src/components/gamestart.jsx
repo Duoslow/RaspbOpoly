@@ -2,46 +2,26 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { IconButton, Avatar, Box, Typography } from '@mui/material';
 import { connect, useDispatch } from "react-redux";
 import { selectors, actions } from "../redux/store";
+import { useEffect } from 'react';
 
-const GameStart = ({ game }) => {
+const GameStart = ({ game, ui }) => {
 
   const dispatch = useDispatch();
   const NewGame = () => {
-    dispatch(actions.game.newGame());
-    dispatch(actions.ui.game.waitForPlayers());
+    // dispatch(actions.game.newGame());
+    dispatch(actions.ui.setUIState('waitPlayersUI'));  
   }
+  useEffect(() => {
+    console.log(ui);
+  }, [ui]);
+
   return (
     <Box sx={{
       display: 'flex',
       flexDirection: 'row',
     }}
     >
-      <Box >
-        <Box sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-          backgroundImage: 'url(https://source.unsplash.com/featured/?landscape,mountains,dark)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(4px)',
-        }}
-        />
-        <Box sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-          backgroundColor: 'rgba(0,0,0,0.5)',
-        }}
-        />
-      </Box>
+      
       <Box sx={{ flex: 1 }} />
       <Box
         sx={{
@@ -51,7 +31,6 @@ const GameStart = ({ game }) => {
           alignItems: 'center',
           width: '100%',
           zIndex: 1,
-          marginTop: '50%',
         }}
       >
         <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', color: 'salmon' }}>
@@ -85,5 +64,6 @@ const GameStart = ({ game }) => {
 export default connect(
   (state) => ({
     game: state.game,
+    ui: state.ui,
   }),
 )(GameStart);

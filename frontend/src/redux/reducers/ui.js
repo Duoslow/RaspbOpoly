@@ -1,63 +1,32 @@
 const types = {
-    GAME_START_UI: "GAME_START_UI",
-    GAME_WAIT_FOR_PLAYERS_UI: "GAME_WAIT_FOR_PLAYERS_UI",
+    SET_UI_STATE: 'start_ui/setUIState',
 };
 
 const initialState = {
-    game: null,
-    ui: {
-        game: {
-            status: "start",
-        },
-    },
+    startUI: 'mainUI',
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.GAME_START_UI:
+        case types.SET_UI_STATE:
             return {
                 ...state,
-                ui: {
-                    ...state.ui,
-                    game: {
-                        status: "start",
-                    },
-                },
-            };
-        case types.GAME_WAIT_FOR_PLAYERS_UI:
-            return {
-                ...state,
-                ui: {
-                    ...state.ui,
-                    game: {
-                        status: "waitForPlayers",
-                    },
-                },
+                startUI: action.payload,
             };
         default:
             return state;
     }
+}
+
+export const actions = {
+    setUIState: (payload) => ({
+        type: types.SET_UI_STATE,
+        payload,
+    }),
 };
 
-const selectors = {
-    ui: {
-        game: {
-            status: (state) => state.ui.game.status,
-        },
-    },
-};
 
-const actions = {
-    ui: {
-        game: {
-            start: () => ({
-                type: types.GAME_START_UI,
-            }),
-            waitForPlayers: () => ({
-                type: types.GAME_WAIT_FOR_PLAYERS_UI,
-            }),
-        },
-    },
-};
 
-export { reducer, selectors, actions };
+
+
+

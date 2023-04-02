@@ -16,6 +16,7 @@
     "axios": "^1.3.4",
     "eslint": "^8.37.0",
     "react": "latest",
+    "react-dice-complete": "^2.1.0",
     "react-dom": "latest",
     "react-redux": "^8.0.5"
   },
