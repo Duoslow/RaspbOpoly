@@ -18,7 +18,8 @@
     "react": "latest",
     "react-dice-complete": "^2.1.0",
     "react-dom": "latest",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "latest",

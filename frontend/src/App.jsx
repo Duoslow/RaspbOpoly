@@ -9,6 +9,7 @@ import GameWaitPlayers from './components/gamewaitplayers';
 import BottomBar from './components/bottomappbar';
 import RollDice from './components/rolldice';
 import GameMain from './components/gamemain';
+import Actions from './components/actions';
 const App = ({ game, ui }) => {
   useEffect(() => {
     console.log(game);
@@ -43,6 +44,11 @@ const App = ({ game, ui }) => {
       <Fade in={ui.startUI === 'gameUI' && game.started} timeout={1000}>
         <Box sx={{position:'absolute'}}>
           {ui.startUI === 'gameUI' && <GameMain />}
+        </Box>
+      </Fade>
+      <Fade in={ui.startUI === 'actionsUI'} timeout={1000}>
+        <Box sx={{position:'absolute', height:'100%'}}>
+          {ui.startUI === 'actionsUI' && <Actions />}
         </Box>
       </Fade>
       <BottomBar />

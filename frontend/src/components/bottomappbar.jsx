@@ -27,6 +27,9 @@ const BottomBar = ({ ui, game }) => {
             dispatch(actions.ui.setUIState('mainUI'));
         }
     }
+    const actionsui = () => {
+        dispatch(actions.ui.setUIState('actionsUI'));
+    }
     return (
         <Box>
             <BottomNavigation
@@ -49,7 +52,7 @@ const BottomBar = ({ ui, game }) => {
             >
                 <BottomNavigationAction label="Roll a dice" icon={<CasinoIcon />} onClick={rolldice} />
                 <BottomNavigationAction label="Game" icon={<PlayArrowIcon />} onClick={gameui} />
-                <BottomNavigationAction label="Actions" icon={<MenuIcon />} />
+                <BottomNavigationAction label="Actions" icon={<MenuIcon />} onClick={actionsui} />
             </BottomNavigation>
         </Box>
     );

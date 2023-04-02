@@ -42,6 +42,8 @@ const RollDice = ({ game, ui }) => {
                 dieCornerRadius={10}
                 margin={20}
                 disableIndividual={true}
+                outline={true}
+                outlineColor={'#FFFDD0'}
                 rollTime={1}
                 ref={reactDice}
                 rollDone={rollDone}

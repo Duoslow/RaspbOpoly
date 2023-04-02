@@ -3,13 +3,22 @@ import { IconButton, Avatar, Box, Typography } from '@mui/material';
 import { connect, useDispatch } from "react-redux";
 import { selectors, actions } from "../redux/store";
 import { useEffect } from 'react';
-
+import axios from 'axios';
 const GameStart = ({ game, ui }) => {
 
   const dispatch = useDispatch();
-  const NewGame = () => {
-    // dispatch(actions.game.newGame());
-    dispatch(actions.ui.setUIState('waitPlayersUI'));  
+  const CreateNewGame = () => {
+    // dispatch(actions.game.CreateNewGame());
+    axios(
+      {
+        method: 'post',
+        url: 'game/create_new_game/',
+        data: {}
+      }
+    ).then((response) => {
+      console.log(response);
+    })
+    dispatch(actions.ui.setUIState('waitPlayersUI'));
   }
   useEffect(() => {
     console.log(ui);
@@ -21,7 +30,7 @@ const GameStart = ({ game, ui }) => {
       flexDirection: 'row',
     }}
     >
-      
+
       <Box sx={{ flex: 1 }} />
       <Box
         sx={{
@@ -50,7 +59,7 @@ const GameStart = ({ game, ui }) => {
             },
           }}
           variant="contained"
-          onClick={NewGame}
+          onClick={CreateNewGame}
         >
           <Avatar sx={{ width: 98, height: 98, bgcolor: 'black', color: 'white', opacity: 0.8 }}>
             <PlayArrowIcon sx={{ width: 60, height: 60, }} />
