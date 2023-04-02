@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "yarn dev",
+            "runtimeExecutable": "yarn",
+            "cwd": "${workspaceFolder}/frontend",
+            "args": [
+                "dev",
+                "--host",
+                // "--open"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/manage.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/backend/",
+            "python": "${command:python.interpreterPath}",
+            "args": [
+                "runserver",
+                "0.0.0.0:8000",
+            ],
+            "django": true,
+            "justMyCode": false,
+        },
+    ],
+    "compounds": [
+        {
+            "name": "django + vite",
+            "configurations": [
+                "Django",
+                "yarn dev",
+            ]
+        }
+    ]
+}
